@@ -79,6 +79,15 @@ class LocalMockDatabase {
 
 export const localMockDb = new LocalMockDatabase();
 
+// Maintain a global connection reference across serverless cold starts
+const globalForSnowflake = global as unknown as {
+  snowflakeConnection: any;
+};
+
+if (!globalForSnowflake.snowflakeConnection) {
+  globalForSnowflake.snowflakeConnection = null;
+}
+
 // Snowflake Connection Pool & Operations
 export class SnowflakeConnector {
   private config: any;
@@ -105,22 +114,11 @@ export class SnowflakeConnector {
         return;
       }
 
-      const connection = snowflake.createConnection(this.config);
-      connection.connect((err, conn) => {
-        if (err) {
-          reject(err);
-          return;
-        }
-
+      const runStatement = (conn: any) => {
         conn.execute({
           sqlText,
           binds,
           complete: (err, stmt, rows) => {
-            // Destroy connection in callback
-            conn.destroy((destroyErr) => {
-              if (destroyErr) console.error('Error closing Snowflake connection:', destroyErr);
-            });
-
             if (err) {
               reject(err);
             } else {
@@ -128,7 +126,23 @@ export class SnowflakeConnector {
             }
           }
         });
-      });
+      };
+
+      const cachedConn = globalForSnowflake.snowflakeConnection;
+      if (cachedConn) {
+        runStatement(cachedConn);
+      } else {
+        const connection = snowflake.createConnection(this.config);
+        connection.connect((err, conn) => {
+          if (err) {
+            reject(err);
+            return;
+          }
+          globalForSnowflake.snowflakeConnection = conn;
+          console.log('[SNOWFLAKE] Global connection established and cached.');
+          runStatement(conn);
+        });
+      }
     });
   }
 

@@ -23,7 +23,9 @@ export class Colony {
   public ants: Ant[] = [];
   public eggs: Egg[] = [];
   public wind: Vector2D = new Vector2D(0, 0);
+  public targetWind: Vector2D = new Vector2D(0, 0);
   public mutationSpeed: number = 1.0;
+  public targetMutationSpeed: number = 1.0;
   public foodCollected: number = 0;
   public currentSlot: number = 0;
   public currentHash: string = '00000000000000000000000000000000';
@@ -74,6 +76,12 @@ export class Colony {
   }
 
   public update() {
+    // Smoothly interpolate wind and mutation speed (lerp) over ~24 frames
+    const lerpRate = 0.05;
+    this.wind.x += (this.targetWind.x - this.wind.x) * lerpRate;
+    this.wind.y += (this.targetWind.y - this.wind.y) * lerpRate;
+    this.mutationSpeed += (this.targetMutationSpeed - this.mutationSpeed) * lerpRate;
+
     // Update map pheromones
     const pheromoneDecay = 0.99; // Can be altered by Solana hash
     this.map.update(pheromoneDecay);
@@ -247,11 +255,11 @@ export class Colony {
       // 2. Wind Force (Bytes 2-3)
       const b2 = parseInt(hash.substring(4, 6), 16) || 0;
       const windMag = (b2 / 255) * 0.4; // max wind strength
-      this.wind = Vector2D.fromAngle(windAngle, windMag);
+      this.targetWind = Vector2D.fromAngle(windAngle, windMag);
 
       // 3. Mutation speed (Bytes 4-5) - influences max speed of ants
       const b4 = parseInt(hash.substring(8, 10), 16) || 128;
-      this.mutationSpeed = 0.5 + (b4 / 255) * 1.5; // ranges from 0.5x to 2.0x standard speed
+      this.targetMutationSpeed = 0.5 + (b4 / 255) * 1.5; // ranges from 0.5x to 2.0x standard speed
 
       // 4. Catastrophic/Dynamic event check (Bytes 6-7)
       const b6 = parseInt(hash.substring(12, 14), 16) || 0;
