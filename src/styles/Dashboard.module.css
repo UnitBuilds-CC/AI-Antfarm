@@ -1,0 +1,238 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 100vw;
+  background-color: var(--bg-color);
+  position: relative;
+  overflow: hidden;
+}
+
+.header {
+  height: 60px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+  border-bottom: 1px solid var(--border-color);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+  z-index: 10;
+}
+
+.logoContainer {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.logoText {
+  font-size: 1.25rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  background: linear-gradient(90deg, var(--neon-cyan), var(--neon-gold));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-family: var(--font-mono);
+}
+
+.logoSub {
+  font-size: 0.65rem;
+  color: var(--text-muted);
+  border: 1px solid var(--border-color);
+  padding: 2px 6px;
+  border-radius: 3px;
+  font-family: var(--font-mono);
+  background: rgba(0, 242, 254, 0.05);
+}
+
+.controls {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.speedControls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+}
+
+.speedSlider {
+  -webkit-appearance: none;
+  width: 100px;
+  height: 4px;
+  border-radius: 2px;
+  background: var(--border-color);
+  outline: none;
+}
+
+.speedSlider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--neon-cyan);
+  cursor: pointer;
+  box-shadow: 0 0 5px var(--neon-cyan-glow);
+}
+
+.mainLayout {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 280px 1fr 300px;
+  gap: 12px;
+  padding: 12px;
+  overflow: hidden;
+  height: calc(100vh - 60px);
+}
+
+/* Sidebar layouts */
+.leftSidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  height: 100%;
+  overflow: hidden;
+}
+
+.solanaFeedSection {
+  height: 200px;
+}
+
+.loreBookSection {
+  flex: 1;
+}
+
+.canvasContainer {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  position: relative;
+  align-items: center;
+  justify-content: center;
+}
+
+.canvasCard {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+}
+
+.canvasToolbar {
+  height: 40px;
+  border-bottom: 1px solid var(--border-color);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 12px;
+  background: rgba(4, 6, 13, 0.4);
+}
+
+.toolGroup {
+  display: flex;
+  gap: 8px;
+}
+
+.toolBtn {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: var(--text-secondary);
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  padding: 4px 8px;
+  cursor: pointer;
+  border-radius: 3px;
+  transition: all 0.2s ease;
+}
+
+.toolBtn:hover {
+  border-color: var(--neon-cyan);
+  color: var(--neon-cyan);
+}
+
+.toolBtn.active {
+  border-color: var(--neon-cyan);
+  background: rgba(0, 242, 254, 0.1);
+  color: var(--neon-cyan);
+  box-shadow: 0 0 5px var(--neon-cyan-glow);
+}
+
+.toolBtn.sugar.active {
+  border-color: var(--neon-gold);
+  background: rgba(255, 208, 0, 0.1);
+  color: var(--neon-gold);
+  box-shadow: 0 0 5px var(--neon-gold-glow);
+}
+
+.toolBtn.water.active {
+  border-color: var(--neon-cyan);
+  background: rgba(0, 242, 254, 0.1);
+  color: var(--neon-cyan);
+  box-shadow: 0 0 5px var(--neon-cyan-glow);
+}
+
+.toolBtn.select.active {
+  border-color: var(--text-primary);
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--text-primary);
+}
+
+.instructions {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--text-muted);
+}
+
+.canvasWrapper {
+  flex: 1;
+  position: relative;
+  width: 100%;
+  height: calc(100% - 40px);
+  background: #020306;
+}
+
+.rightSidebar {
+  height: 100%;
+  overflow: hidden;
+}
+
+.emptyInspector {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  text-align: center;
+  padding: 24px;
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+}
+
+.emptyInspectorIcon {
+  font-size: 2.5rem;
+  margin-bottom: 12px;
+  opacity: 0.3;
+}
+
+/* Mobile responsive fallbacks */
+@media (max-width: 1024px) {
+  .mainLayout {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 500px auto;
+    overflow-y: auto;
+    height: auto;
+  }
+  
+  .leftSidebar, .rightSidebar {
+    height: auto;
+  }
+}

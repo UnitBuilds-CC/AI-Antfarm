@@ -1,0 +1,307 @@
+/* HUD Panel styling */
+.panel {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 16px;
+  overflow: hidden;
+}
+
+.panelHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 8px;
+}
+
+.panelTitle {
+  font-size: 0.95rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-family: var(--font-mono);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.panelContent {
+  flex: 1;
+  overflow-y: auto;
+}
+
+/* Slot Feed Stats */
+.feedGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  margin-bottom: 12px;
+}
+
+.statCard {
+  background: rgba(4, 6, 13, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  padding: 8px 12px;
+  border-radius: 4px;
+}
+
+.statLabel {
+  color: var(--text-muted);
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+
+.statValue {
+  color: var(--text-primary);
+  font-weight: 500;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.statValue.active {
+  color: var(--neon-cyan);
+}
+
+.statValue.gold {
+  color: var(--neon-gold);
+}
+
+/* Lore Book List */
+.loreList {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.loreItem {
+  border-left: 2px solid var(--border-color);
+  padding-left: 10px;
+  font-size: 0.8rem;
+  line-height: 1.35;
+  transition: border-color 0.2s ease;
+}
+
+.loreItem:hover {
+  border-color: var(--neon-cyan);
+}
+
+.loreMeta {
+  display: flex;
+  gap: 8px;
+  font-size: 0.7rem;
+  font-family: var(--font-mono);
+  margin-bottom: 3px;
+}
+
+.loreSlot {
+  color: var(--neon-gold);
+}
+
+.loreTime {
+  color: var(--text-muted);
+}
+
+.loreType {
+  padding: 0px 4px;
+  border-radius: 2px;
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+.type_COSMIC_EVENT {
+  background: rgba(0, 242, 254, 0.15);
+  color: var(--neon-cyan);
+}
+
+.type_CATASTROPHE {
+  background: rgba(255, 0, 119, 0.15);
+  color: var(--neon-magenta);
+}
+
+.type_BIRTH {
+  background: rgba(0, 255, 0, 0.1);
+  color: #55ff55;
+}
+
+.type_ROYAL_EVENT {
+  background: rgba(255, 208, 0, 0.15);
+  color: var(--neon-gold);
+}
+
+/* Ant Inspector panel */
+.inspectorCard {
+  border-radius: 4px;
+  border: 1px solid var(--border-color);
+  background: rgba(4, 6, 13, 0.6);
+  padding: 14px;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+}
+
+.energyBarContainer {
+  height: 8px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+  margin: 6px 0 14px 0;
+  overflow: hidden;
+}
+
+.energyBar {
+  height: 100%;
+  background: linear-gradient(90deg, var(--neon-magenta), var(--neon-cyan));
+  transition: width 0.3s ease;
+}
+
+.logList {
+  list-style: none;
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  max-height: 120px;
+  overflow-y: auto;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  padding-top: 8px;
+  margin-top: 10px;
+}
+
+/* Monologue Speech section */
+.monologueContainer {
+  background: rgba(0, 242, 254, 0.03);
+  border: 1px dashed var(--border-color);
+  border-radius: 4px;
+  padding: 12px;
+  margin-top: 14px;
+  position: relative;
+}
+
+.monologueQuote {
+  font-style: italic;
+  line-height: 1.4;
+  color: var(--text-primary);
+  margin-bottom: 8px;
+  font-size: 0.85rem;
+  border-left: 2px solid var(--neon-cyan);
+  padding-left: 8px;
+}
+
+.monologueSource {
+  font-size: 0.65rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  text-align: right;
+  letter-spacing: 0.5px;
+}
+
+.whisperForm {
+  display: flex;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.whisperInput {
+  flex: 1;
+  background: rgba(4, 6, 13, 0.8);
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  padding: 6px 10px;
+  border-radius: 3px;
+  outline: none;
+}
+
+.whisperInput:focus {
+  border-color: var(--neon-cyan);
+  box-shadow: 0 0 5px var(--neon-cyan-glow);
+}
+
+.whisperBtn {
+  background: transparent;
+  border: 1px solid var(--neon-cyan);
+  color: var(--neon-cyan);
+  cursor: pointer;
+  padding: 4px 10px;
+  border-radius: 3px;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  transition: all 0.2s ease;
+}
+
+.whisperBtn:hover {
+  background: var(--neon-cyan);
+  color: #000;
+}
+
+/* Modal Settings overlay */
+.modalOverlay {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(2, 3, 7, 0.85);
+  backdrop-filter: blur(8px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modalContent {
+  width: 90%;
+  max-width: 500px;
+  padding: 24px;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  max-height: 85vh;
+}
+
+.modalBody {
+  flex: 1;
+  overflow-y: auto;
+  margin: 16px 0;
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 16px;
+}
+
+.formGroup label {
+  font-size: 0.75rem;
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  color: var(--text-secondary);
+}
+
+.formGroup input, .formGroup select {
+  background: rgba(4, 6, 13, 0.6);
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
+  padding: 8px 12px;
+  border-radius: 4px;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  outline: none;
+}
+
+.formGroup input:focus, .formGroup select:focus {
+  border-color: var(--neon-cyan);
+}
+
+.modalFooter {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  border-top: 1px solid var(--border-color);
+  padding-top: 14px;
+}
